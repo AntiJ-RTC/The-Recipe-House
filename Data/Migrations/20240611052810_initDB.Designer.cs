@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using The_Recipe_House.Data;
 
@@ -11,9 +12,11 @@ using The_Recipe_House.Data;
 namespace The_Recipe_House.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240611052810_initDB")]
+    partial class initDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -274,10 +277,6 @@ namespace The_Recipe_House.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageURL")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Ingredients")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -303,7 +302,6 @@ namespace The_Recipe_House.Data.Migrations
                             Id = 1,
                             CookTime = 5,
                             Description = "An easy breakfast item that is rich in protein, but low on calories!",
-                            ImageURL = "https://www.allrecipes.com/thmb/IGrCIXMupDR37mMPpZ4DWfBgWM4=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/3661599-how-to-make-perfect-hard-boiled-eggs-Chef-John-1x1-1-bcdf26c1d40645e996e26ae1eedd8d14.jpg",
                             Ingredients = "6 eggs",
                             Instructions = "1. Place eggs in a saucepan and pour in cold water to cover; place over high heat. When water starts to simmer and eggs start to dance around a little, turn off heat, cover the pan quickly with a lid, and let stand for 17 minutes. Don't peek.\r\n\r\n2. Pour out hot water and pour cold water over eggs. Drain and refill with cold water; let stand until eggs are cool, about 20 minutes.\r\n\r\n3. Peel eggs under running water.",
                             PrepTime = 5,
