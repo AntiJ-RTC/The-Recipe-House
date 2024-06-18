@@ -52,7 +52,7 @@ You can edit or delete the comment in the recipe page.
 
 On the very top right corner of the page, there is a "Profile" link. Initially, the page will be blank, so you have to click on "Create New" to add your profile.
 
-In the create page, you can input your username, bio, and profile image. Make sure to select the correct user email for your profile (It should match the email where it says "Hello [EMAIL]!")
+In the create page, you can input your username, bio, and profile image. Make sure to select the correct user email for your profile (It should match the email where it says "Hello [EMAIL]!", otherwise, you can't view your own profile in the index page.)
 
 After creating your profile, you can go to the details page of your profile, or you can edit or delete the profile.
 
