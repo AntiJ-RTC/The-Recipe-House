@@ -34,10 +34,12 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-
+app.MapRazorPages();
+app.MapControllerRoute(name: "title",
+    pattern: "recipe/{id:int}/{title?}",
+    defaults: new { controller = "title", action = "Detials" });
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Recipe}/{action=Index}/{id?}");
-app.MapRazorPages();
 
 app.Run();

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using The_Recipe_House.Data;
 using The_Recipe_House.Models;
@@ -18,6 +19,7 @@ namespace The_Recipe_House.Controllers
         {
             return View(await _context.Recipes.ToListAsync());
         }
+        [Route("recipe/{id:int}/{title}")]
         public async Task<IActionResult> Details (int? id)
         {
             if (id == null)
@@ -26,7 +28,7 @@ namespace The_Recipe_House.Controllers
             }
 
             var recipe = await _context.Recipes
-                .FirstOrDefaultAsync(r => r.Id == id);
+                .Include(r => r.Comments).ThenInclude(c => c.ApplicationUser).FirstOrDefaultAsync(r => r.Id == id);
             if (recipe == null)
             {
                 return NotFound();
@@ -34,6 +36,7 @@ namespace The_Recipe_House.Controllers
 
             return View(recipe);
         }
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -51,6 +54,7 @@ namespace The_Recipe_House.Controllers
             }
             return View(recipe);
         }
+        [Authorize]
         public async Task<IActionResult> Edit (int? id)
         {
             if (id == null)
@@ -97,11 +101,38 @@ namespace The_Recipe_House.Controllers
             }
             return View(recipe);
         }
+        [Authorize]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var recipe = await _context.Recipes.FirstOrDefaultAsync(r => r.Id == id);
+            if (recipe == null)
+            {
+                return NotFound();
+            }
+            return View(recipe);
+        }
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var recipe = await _context.Recipes.FindAsync(id);
+            if (recipe != null)
+            {
+                _context.Recipes.Remove(recipe);
+            }
 
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
         private bool RecipePresent(int id)
         {
             return _context.Recipes.Any(e  => e.Id == id);
         }
+
 
     }
 }
