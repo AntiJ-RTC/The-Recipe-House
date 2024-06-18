@@ -1,0 +1,9 @@
+﻿<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown">View other profiles</a>
+    <ul class="dropdown-menu">
+        @foreach (var profile in Model)
+        {
+            <li> <a asp-controller="Profile" asp-action="Details" asp-route-id="@profile.Id" class="text-decoration-none text-reset">@profile.Username</a> </li>
+        }
+    </ul>
+</li>

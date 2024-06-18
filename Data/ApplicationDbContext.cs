@@ -13,6 +13,7 @@ namespace The_Recipe_House.Data
 
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<Comments> Comments { get; set; }
+        public DbSet<Profile> Profiles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

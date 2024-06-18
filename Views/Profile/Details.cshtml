@@ -1,0 +1,21 @@
+﻿@model The_Recipe_House.Models.Profile
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Profile</h4>
+    <hr />
+
+<div class="card">
+    <img src="@Model.ProfileImg" class="card-img-top" style="padding: 10px; object-fit: cover; width: 250px; height: 250px;" alt="Profile Image" />
+    <div class="card-body">
+        <h5 class="card-title">@Model.Username</h5>
+        <p class="card-text">@Model.Bio</p>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+    </div>
+</div>
