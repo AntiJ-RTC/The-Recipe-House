@@ -63,6 +63,7 @@ namespace The_Recipe_House.Controllers
             ViewData["ApplicationUserId"] = new SelectList(_context.Users, "Id", "UserName", profile.ApplicationUserId);
             return View(profile);
         }
+        [Authorize]
 
         public async Task<IActionResult> Edit(int? id)
         {
@@ -113,7 +114,7 @@ namespace The_Recipe_House.Controllers
             return View(profile);
         }
 
-        // GET: Tickets/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
